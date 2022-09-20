@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+:Central Computer System: as a1
+:Traveller: as a2
+rectangle TrainSystem {
+  (Buy OneWay Ticket) as u1
+  (Buy Weekly Card) as u2
+  (Buy Monthly Card) as u3
+  (Update Tariff) as u4
+  
+  (Time-Out) as u5
+  (Transaction Aborted) as u6
+  (Distributor Out Of Change) as u7
+  (Distributor Out Of Paper) as u8
+} 
+
+
+u1 <-down- a2
+u2 <-down- a2
+u3 <-down- a2
+u4 <--> a1
+
+u1 --> u4
+u2 --> u4
+u3 --> u4
+
+u5 .down.> u1 : extends
+u5 .down.> u2 : extends
+u5 .down.> u3 : extends
+
+u6 ..> u1 : extends
+u6 ..> u2 : extends
+u6 ..> u3 : extends
+
+u7 ..> u4 : extends
+u8 ..> u4 : extends
+
+
+@enduml
