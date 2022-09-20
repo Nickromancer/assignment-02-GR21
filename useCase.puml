@@ -14,7 +14,6 @@ rectangle TrainSystem {
   (Distributor Out Of Paper) as u8
 } 
 
-
 u1 <-down- a2
 u2 <-down- a2
 u3 <-down- a2
@@ -34,6 +33,5 @@ u6 ..> u3 : extends
 
 u7 ..> u4 : extends
 u8 ..> u4 : extends
-
 
 @enduml
