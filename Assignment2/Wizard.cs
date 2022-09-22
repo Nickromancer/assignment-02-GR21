@@ -22,5 +22,9 @@ public class WizardCollection : IEnumerable<Wizard>
 
     public IEnumerator<Wizard> GetEnumerator() => Read.Value.GetEnumerator();
 
+    public IEnumerator<Wizard> GetEnumerator1(){
+        return Read.Value.GetEnumerator();
+    } 
+
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
