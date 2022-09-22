@@ -2,42 +2,37 @@ namespace Assignment2;
 
 public class Queries
 {
-    //
-    public IReadOnlyCollection<Wizard> wizards;
-    //public IEnumerator<Wizard> wizards = WizardCollection.Create().GetEnumerator();
-
     // Extension
     public IEnumerable<string> byRowlingExt() {
-        if (wizards == null) throw new Exception();
-        else return wizards.Where(w => w.Creator.Contains("Rowling")).Select(w => w.Name);
+        WizardCollection wizards = WizardCollection.Create();
+        return wizards.Where(w => w.Creator.Contains("Rowling")).Select(w => w.Name);
     }
 
     public IEnumerable<int?> firstSithExt() {
-        if (wizards == null) throw new Exception();
-        else return wizards.Where(w => w.Name.Contains("Darth")).OrderBy(w => w.Year).Select(w => w.Year).Take(1);
+        WizardCollection wizards = WizardCollection.Create();
+        return wizards.Where(w => w.Name.Contains("Darth")).OrderBy(w => w.Year).Select(w => w.Year).Take(1);
     }
 
     public IEnumerable<(string, int?)> uniqHPExt() {
-        if (wizards == null) throw new Exception();
-        else return wizards.Where(w => w.Medium.Contains("Harry Potter")).Select(w => (w.Name, w.Year));
+        WizardCollection wizards = WizardCollection.Create();
+        return wizards.Where(w => w.Medium.Contains("Harry Potter")).Select(w => (w.Name, w.Year));
     }
 
     public IEnumerable<string> wizRevExt() {
-        if (wizards == null) throw new Exception();
-        else {
-            var listWiz = wizards.OrderBy(w => w.Name).GroupBy(w => w.Creator).OrderByDescending(w => w.Key).Select(w => w);
-            foreach (var wLst in listWiz)
+        WizardCollection wizards = WizardCollection.Create();
+        var listWiz = wizards.OrderBy(w => w.Name).GroupBy(w => w.Creator).OrderByDescending(w => w.Key).Select(w => w);
+        foreach (var wLst in listWiz)
+        {
+            foreach (var w in wLst)
             {
-                foreach (var w in wLst)
-                {
-                    yield return w.Name;
-                }
+                yield return w.Name;
             }
         }
     }
 
     // LINQ
     public IEnumerable<string> byRowling() {
+        WizardCollection wizards = WizardCollection.Create();
         var names =
             from w in wizards
             where w.Creator.Contains("Rowling")
@@ -46,6 +41,7 @@ public class Queries
     }
 
     public IEnumerable<int?> firstSith() {
+        WizardCollection wizards = WizardCollection.Create();
         var year = (
             from w in wizards
             where w.Name.Contains("Darth")
@@ -55,6 +51,7 @@ public class Queries
     }
 
     public IEnumerable<(string, int?)> uniqHP() {
+        WizardCollection wizards = WizardCollection.Create();
         var listHP =
             from w in wizards
             where w.Medium.Contains("Harry Potter")
@@ -63,6 +60,7 @@ public class Queries
     }
 
     public IEnumerable<string> wizRev() {
+        WizardCollection wizards = WizardCollection.Create();
         var listWiz =
             from w in wizards
             orderby w.Name
